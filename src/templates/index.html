@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+    <title>Файловое хранилище</title>
+</head>
+<body>
+		<h1>Список директорий</h1>
+			{%for path in path_tree %}
+				<a href="/{{path}}">{{path}}</a><br>
+			{% endfor %}
+	  <h1>Список файлов</h1>
+		<table class="table">
+			<tr>
+				<th>Имя файла</th>
+				<th>Расширение</th>
+				<th>Размер</th>
+				<th>Путь</th>
+				<th>Создано</th>
+				<th>Изменено</th>
+				<th>Комментарий</th>
+			</tr>
+			{% for file in all_files %}
+			<tr>
+				<td>{{ file.name }}</td>
+				<td>{{ file.extension }}</td>
+				<td>{{ file.size }}</td>
+				<td>{{ file.path }}</td>
+				<td>{{ file.created_on }}</td>
+				<td>{{ file.changed_on }}</td>
+				<td>{{ file.commentary }}</td>
+				<td><a href="/update/{{file.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Изменить метаданные файла?')">Изменить</a></td>
+				<td><a href="/delete/{{file.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Удалить файл из хранилища?')">Удалить</a></td>
+				<td><a href="/{{file.id}}">Подробнее</a></td>
+
+			</tr>
+			{% endfor %}
+		</table>
+	<h1>Добавить файл</h1>
+	<form action = "/" method = "POST" enctype="multipart/form-data"> 
+		<input type="file" name="file" /> 
+		<p><label for="commentary">Комментарий:</label></p>
+		<p><textarea id="commentary" cols="50" name="commentary" rows="10">Дополнительные сведения о файле</textarea> 
+		<p><input type = "submit" value="Загрузить файл"></p>
+	</form> 
+
+
+</body>
+</html>
+

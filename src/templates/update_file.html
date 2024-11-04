@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>{{ fname }}</title>
+</head>
+<body>
+<h1>Редактировать информацию о файле</h1>
+<form method="POST">
+<label for="name">Имя файла:</label> 
+<input id="name" maxlength="50" name="name" required="" size="60" type="text" /> 
+<p><label for="commentary">Комментарий:</label></p>
+<p><textarea id="commentary" cols="50" name="commentary" rows="10">Дополнительные сведения о файле
+</textarea> 
+<p><label for="replace">Переестить файл в директорию:</label></p><br>
+<select name="directories" id="directories">
+{%for path in path_tree %}
+  <option value="{{path}}">{{path}}</option>
+{% endfor %}
+</select>
+<br><br /><br /><input type="submit" value="Сохранить изменения"/></p>
+</form>
+</body>
+</html>
+
